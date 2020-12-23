@@ -40,9 +40,7 @@ func (s *serviceState) process(api *spec.ApiSpec) (state, error) {
 	}
 
 	api.Service = spec.Service{
-		Name:        name,
-		Annotations: append(api.Service.Annotations, s.annos...),
-		Routes:      append(api.Service.Routes, routes...),
+		Name: name,
 		Groups: append(api.Service.Groups, spec.Group{
 			Annotations: s.annos,
 			Routes:      routes,
@@ -70,6 +68,12 @@ func (p *serviceEntityParser) parseLine(line string, api *spec.ApiSpec, annos []
 		ch, _, err := reader.ReadRune()
 		if err != nil {
 			if err == io.EOF {
+				if builder.Len() > 0 {
+					token := strings.TrimSpace(builder.String())
+					if len(token) > 0 && token != returnsTag {
+						fields = append(fields, token)
+					}
+				}
 				break
 			}
 			return err

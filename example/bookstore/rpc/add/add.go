@@ -7,10 +7,10 @@ import (
 	"flag"
 	"fmt"
 
+	"bookstore/rpc/add/add"
 	"bookstore/rpc/add/internal/config"
 	"bookstore/rpc/add/internal/server"
 	"bookstore/rpc/add/internal/svc"
-	add "bookstore/rpc/add/pb"
 
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/core/logx"
